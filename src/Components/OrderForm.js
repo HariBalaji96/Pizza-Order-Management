@@ -1,17 +1,35 @@
 import React from "react";
+import { useState } from "react";
+const OrderForm = ({ addOrder }) => {
+  const [type, setType] = useState("");
+  const [size, setSize] = useState("");
+  const [base, setBase] = useState("");
 
-const OrderForm = ({ setType, setBase, setSize, handleFormData }) => {
+  function handleFormData(event) {
+    event.preventDefault();
+    if (type && size && base) {
+      addOrder({ type, size, base });
+      setType("");
+      setSize("");
+      setBase("");
+    } else {
+      alert("Please select all fields");
+    }
+  }
+
   return (
     <div className="OrderForm">
       <form onSubmit={handleFormData} className="formClass">
         <div>
           <label htmlFor="type">Type:</label>
           <select
+            value={type}
             className="dropdownField"
             name="type"
             id="type"
             onChange={(e) => setType(e.target.value)}
           >
+            <option value="">Select Type</option>
             <option value="Veg">Veg</option>
             <option value="Non-Veg">Non-Veg</option>
           </select>
@@ -20,11 +38,13 @@ const OrderForm = ({ setType, setBase, setSize, handleFormData }) => {
         <div>
           <label htmlFor="size">Size:</label>
           <select
+            value={size}
             className="dropdownField"
             name="size"
             id="size"
             onChange={(e) => setSize(e.target.value)}
           >
+            <option value="">Select Size</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -34,11 +54,13 @@ const OrderForm = ({ setType, setBase, setSize, handleFormData }) => {
         <div>
           <label htmlFor="base">Base:</label>
           <select
+            value={base}
             className="dropdownField"
             name="base"
             id="base"
             onChange={(e) => setBase(e.target.value)}
           >
+            <option value="">Select Base</option>
             <option value="Thick">Thick</option>
             <option value="Thin">Thin</option>
           </select>

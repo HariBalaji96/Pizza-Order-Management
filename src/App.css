@@ -95,3 +95,25 @@
 .Order-Card span {
   margin: 5px;
 }
+.MainSection {
+  padding: 10px;
+}
+table {
+  width: 100%;
+  border: white;
+}
+td {
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  outline: rgb(255, 255, 255, 0.5);
+  cursor: pointer;
+  background-color: wheat;
+  color: black;
+  font-family: inherit;
+}

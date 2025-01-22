@@ -5,45 +5,123 @@ import MainSection from "./Components/MainSection";
 import OrderForm from "./Components/OrderForm";
 
 function App() {
-  const [type, setType] = useState("Veg");
-  const [size, setSize] = useState("Small");
-  const [base, setBase] = useState("Thick");
-  const [placedOrders, setPlacedOrders] = useState([]);
-  const [sec, setSec] = useState(0);
-  const [status, setStatus] = useState("Placed");
+  const MAX_ORDERS = 10;
+  const [orders, setOrders] = useState([]);
+  const [totalDelivered, setTotalDelivered] = useState(0);
+  const [pizzaCount, setPizzaCount] = useState(0);
+  const [id, setId] = useState(0);
+
+  const addOrder = (pizza) => {
+    if (pizzaCount < MAX_ORDERS) {
+      const newOrder = {
+        id: id + 1,
+        ...pizza,
+        stage: "Order Placed",
+        stageTimes: {
+          "Order Placed": 0,
+          "Order in Making": 0,
+          "Order Ready": 0,
+          "Order Picked": 0,
+        },
+        stageStartTimes: { "Order Placed": Date.now() },
+      };
+      setOrders((prevOrders) => [...prevOrders, newOrder]);
+      setPizzaCount(pizzaCount + 1);
+      setId(id + 1);
+    } else {
+      alert("Not taking any order for now");
+    }
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSec(sec + 1);
-    }, 1000);
+    const intervals = orders.map((order) => {
+      const stage = order.stage;
+      if (stage) {
+        const interval = setInterval(() => {
+          setOrders((prevOrders) =>
+            prevOrders.map((o) =>
+              o.id === order.id
+                ? {
+                    ...o,
+                    stageTimes: {
+                      ...o.stageTimes,
+                      [stage]: Math.floor(
+                        (Date.now() - o.stageStartTimes[stage]) / 1000
+                      ),
+                    },
+                  }
+                : o
+            )
+          );
+        }, 1000);
+        return interval;
+      }
+      return null;
+    });
 
-    return () => clearInterval(interval);
-  }, [sec]);
+    return () => {
+      intervals.forEach((interval) => clearInterval(interval));
+    };
+  }, [orders]);
 
-  const [id, setId] = useState(0);
-  function handleFormData(event) {
-    event.preventDefault();
-    const temp = id + 1;
-    setId(temp);
-    const newOrder = placedOrders;
-    newOrder.push([temp, type, size, base]);
-    setPlacedOrders(newOrder);
-    console.log(placedOrders);
-  }
+  const moveToNextStage = (id) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) => {
+        if (order.id === id) {
+          const stages = [
+            "Order Placed",
+            "Order in Making",
+            "Order Ready",
+            "Order Picked",
+          ];
+          const currentStageIndex = stages.indexOf(order.stage);
+          if (currentStageIndex < stages.length - 1) {
+            const nextStage = stages[currentStageIndex + 1];
+            return {
+              ...order,
+              stage: nextStage,
+              stageStartTimes: {
+                ...order.stageStartTimes,
+                [nextStage]: Date.now(),
+              },
+            };
+          }
+        }
+        return order;
+      })
+    );
+  };
+
+  const cancelOrder = (id) => {
+    setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
+    setPizzaCount(pizzaCount - 1);
+  };
+
+  const calculateTotalTime = (order) => {
+    const stages = [
+      "Order Placed",
+      "Order in Making",
+      "Order Ready",
+      "Order Picked",
+    ];
+    const totalTime = stages.reduce((acc, stage) => {
+      return acc + order.stageTimes[stage];
+    }, 0);
+    return totalTime;
+  };
 
   return (
     <div className="App">
       <header>
         <h1 className="titleText">Pizza Zone</h1>
       </header>
-      <OrderForm
-        setType={setType}
-        setBase={setBase}
-        setSize={setSize}
-        handleFormData={handleFormData}
+      <OrderForm addOrder={addOrder} />
+      <DisplaySection orders={orders} moveToNextStage={moveToNextStage} />
+      <MainSection
+        orders={orders}
+        cancelOrder={cancelOrder}
+        calculateTotalTime={calculateTotalTime}
       />
-      <DisplaySection placedOrders={placedOrders} sec={sec} />
-      <MainSection />
     </div>
   );
 }
