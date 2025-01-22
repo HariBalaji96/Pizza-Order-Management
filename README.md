@@ -1,5 +1,7 @@
 # Pizza Zone
 
+#### This application simulates a pizza restaurant behavior. From taking orders to making the order ready. Below are the functionalities of the application
+
 ## I code with
 
 <div align="left">
@@ -12,13 +14,11 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="reactjs logo"  />
   <img width="12" />
 
-#### This application simulates a pizza restaurant behavior. From taking orders to making the order ready. Below are the functionalities of the application
+##### Placing a pizza order (simulate through a form) - add a form from which pizza can be configured & ordered with following options
 
-##### 1. Placing a pizza order (simulate through a form) - add a form from which pizza can be configured & ordered with following options
-
-Types : - Veg, Non-Veg
-Size : - Large, Medium, Small
-Base : - Thin, Thick
+1. Types : - Veg, Non-Veg
+2. Size : - Large, Medium, Small
+3. Base : - Thin, Thick
 
 ##### 2. There can be 10 max number of orders a restaurant can handle at a time, otherwise show “Not taking any order for now”
 
