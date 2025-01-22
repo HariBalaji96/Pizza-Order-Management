@@ -44,4 +44,4 @@
 
 ##### 9. Pizza will be moved from one stage to another manually with click on Next buttons
 
-# [inline link](https://pizza-order-management.vercel.app/ "click here for a good time!")
+# [Click here for a viewing the demo!](https://pizza-order-management.vercel.app/)
