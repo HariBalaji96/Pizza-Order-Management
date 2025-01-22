@@ -1,5 +1,4 @@
 import React from "react";
-
 const DisplaySection = ({ orders, moveToNextStage }) => {
   return (
     <div className="displaySection">
