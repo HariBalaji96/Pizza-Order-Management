@@ -28,6 +28,7 @@ function App() {
       setOrders((prevOrders) => [...prevOrders, newOrder]);
       setPizzaCount(pizzaCount + 1);
       setId(id + 1);
+      console.log(orders);
     } else {
       alert("Not taking any order for now");
     }
@@ -35,8 +36,7 @@ function App() {
 
   useEffect(() => {
     const intervals = orders.map((order) => {
-      const stage = order.stage;
-      if (stage) {
+      if (order.stage !== "Order Picked") {
         const interval = setInterval(() => {
           setOrders((prevOrders) =>
             prevOrders.map((o) =>
@@ -45,10 +45,11 @@ function App() {
                     ...o,
                     stageTimes: {
                       ...o.stageTimes,
-                      [stage]: Math.floor(
-                        (Date.now() - o.stageStartTimes[stage]) / 1000
+                      [order.stage]: Math.floor(
+                        (Date.now() - o.stageStartTimes[order.stage]) / 1000
                       ),
                     },
+                    totalTime: calculateTotalTime(o),
                   }
                 : o
             )
@@ -60,7 +61,9 @@ function App() {
     });
 
     return () => {
-      intervals.forEach((interval) => clearInterval(interval));
+      intervals.forEach((interval) => {
+        if (interval) clearInterval(interval);
+      });
     };
   }, [orders]);
 
@@ -77,6 +80,10 @@ function App() {
           const currentStageIndex = stages.indexOf(order.stage);
           if (currentStageIndex < stages.length - 1) {
             const nextStage = stages[currentStageIndex + 1];
+            if (currentStageIndex == 2) {
+              setTotalDelivered(totalDelivered + 1);
+              setPizzaCount(pizzaCount - 1);
+            }
             return {
               ...order,
               stage: nextStage,
@@ -121,6 +128,7 @@ function App() {
         orders={orders}
         cancelOrder={cancelOrder}
         calculateTotalTime={calculateTotalTime}
+        totalDelivered={totalDelivered}
       />
     </div>
   );

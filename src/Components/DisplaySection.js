@@ -9,9 +9,10 @@ const DisplaySection = ({ orders, moveToNextStage }) => {
           .filter((order) => order.stage == "Order Placed")
           .map((order) => (
             <div
+              key={order.id}
               className="Order-Card"
               style={
-                order.stageTimes[order.stage] > 180
+                order.stageTimes[order.stage] > order.time
                   ? { backgroundColor: "red" }
                   : {}
               }
@@ -35,7 +36,15 @@ const DisplaySection = ({ orders, moveToNextStage }) => {
         {orders
           .filter((order) => order.stage == "Order in Making")
           .map((order) => (
-            <div className="Order-Card">
+            <div
+              key={order.id}
+              className="Order-Card"
+              style={
+                order.stageTimes[order.stage] > order.time
+                  ? { backgroundColor: "red" }
+                  : {}
+              }
+            >
               <span>
                 {order.id < 10 ? "Order 00" + order.id : "Order 0" + order.id}
               </span>
@@ -54,7 +63,15 @@ const DisplaySection = ({ orders, moveToNextStage }) => {
         {orders
           .filter((order) => order.stage == "Order Ready")
           .map((order) => (
-            <div className="Order-Card">
+            <div
+              key={order.id}
+              className="Order-Card"
+              style={
+                order.stageTimes[order.stage] > order.time
+                  ? { backgroundColor: "red" }
+                  : {}
+              }
+            >
               <span>
                 {order.id < 10 ? "Order 00" + order.id : "Order 0" + order.id}
               </span>
@@ -73,7 +90,7 @@ const DisplaySection = ({ orders, moveToNextStage }) => {
         {orders
           .filter((order) => order.stage == "Order Picked")
           .map((order) => (
-            <div className="Order-Card">
+            <div key={order.id} className="Order-Card">
               <span>
                 {order.id < 10 ? "Order 00" + order.id : "Order 0" + order.id}
               </span>

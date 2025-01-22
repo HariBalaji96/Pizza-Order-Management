@@ -8,7 +8,16 @@ const OrderForm = ({ addOrder }) => {
   function handleFormData(event) {
     event.preventDefault();
     if (type && size && base) {
-      addOrder({ type, size, base });
+      if (size == "Small") {
+        var time = 180;
+        addOrder({ type, size, base, time });
+      } else if (size == "Medium") {
+        var time = 240;
+        addOrder({ type, size, base, time });
+      } else {
+        var time = 300;
+        addOrder({ type, size, base, time });
+      }
       setType("");
       setSize("");
       setBase("");
