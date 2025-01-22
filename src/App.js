@@ -28,7 +28,6 @@ function App() {
       setOrders((prevOrders) => [...prevOrders, newOrder]);
       setPizzaCount(pizzaCount + 1);
       setId(id + 1);
-      console.log(orders);
     } else {
       alert("Not taking any order for now");
     }
