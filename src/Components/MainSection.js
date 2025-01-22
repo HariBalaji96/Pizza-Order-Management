@@ -18,31 +18,27 @@ const MainSection = ({
           </tr>
         </thead>
         <tbody>
-          {orders
-            .filter((order) => order.stage != "Order Picked")
-            .map((order) => (
-              <tr key={order.id}>
+          {orders.map((order) => (
+            <tr key={order.id}>
+              <td>
+                {order.id < 10 ? "Order 00" + order.id : "Order 0" + order.id}
+              </td>
+              <td>{order.stage}</td>
+              <td>
+                {Math.floor(calculateTotalTime(order) / 60) +
+                  " min " +
+                  (calculateTotalTime(order) % 60) +
+                  " sec "}
+              </td>
+              {order.stage != "Order Ready" && order.stage != "Order Picked" ? (
                 <td>
-                  {order.id < 10 ? "Order 00" + order.id : "Order 0" + order.id}
+                  <button onClick={() => cancelOrder(order.id)}>Cancel</button>
                 </td>
-                <td>{order.stage}</td>
-                <td>
-                  {Math.floor(calculateTotalTime(order) / 60) +
-                    " min " +
-                    (calculateTotalTime(order) % 60) +
-                    " sec "}
-                </td>
-                {order.stage != "Order Ready" ? (
-                  <td>
-                    <button onClick={() => cancelOrder(order.id)}>
-                      Cancel
-                    </button>
-                  </td>
-                ) : (
-                  <td></td>
-                )}
-              </tr>
-            ))}
+              ) : (
+                <td></td>
+              )}
+            </tr>
+          ))}
         </tbody>
         <tfoot>
           <tr>
