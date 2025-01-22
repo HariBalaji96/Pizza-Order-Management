@@ -1,38 +1,97 @@
 .App {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+.titleText {
   text-align: center;
+  font-size: xx-large;
+  margin-bottom: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.OrderForm {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.5);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.formClass {
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: space-evenly;
+}
+.formClass div {
+  display: flex;
+  flex-direction: column;
+}
+.formClass div label {
+  margin: 5px;
+  font-weight: bold;
+}
+.dropdownField {
+  padding: 15px 20vh;
+  border-radius: 10px;
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  outline: none;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  font-family: inherit;
+}
+.dropdownField option {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#orderButton {
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  outline: rgb(255, 255, 255, 0.5);
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-family: inherit;
+}
+.displaySection {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.displaySection > div {
+  width: 20%;
+  background-color: rgb(255, 255, 255, 0.5);
+  min-height: 220px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.displaySection div h2 {
+  font-family: inherit;
+  text-align: center;
+  padding: 2px;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 500;
+  font-size: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.Order-Card {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px 0px;
+  border-radius: 10px;
+  width: 120px;
+  height: 80px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Order-Card span {
+  margin: 5px;
 }
