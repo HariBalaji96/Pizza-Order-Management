@@ -14,34 +14,33 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="reactjs logo"  />
   <img width="12" />
 
-##### Placing a pizza order (simulate through a form) - add a form from which pizza can be configured & ordered with following options
+##### 1. Placing a Pizza order - Pizza can be configured & ordered with following options
 
-1. Types : - Veg, Non-Veg
-2. Size : - Large, Medium, Small
-3. Base : - Thin, Thick
+- Types : - Veg, Non-Veg
+- Size : - Large, Medium, Small
+- Base : - Thin, Thick
 
-##### 2. There can be 10 max number of orders a restaurant can handle at a time, otherwise show “Not taking any order for now”
+##### 2. This can handle 10 max number of orders at a time, otherwise it will show “Not taking any order for now”
 
 ##### 3. Stages of pizza
 
-a. Order Placed
-b. Order in Making
-c. Order Ready
-d. Order Picked
+- Order Placed
+- Order in Making
+- Order Ready
+- Order Picked
 
-##### 4. Highlight with Red if a pizza is in same stage for more that 3 min
+##### 4. Highlight with Red if a pizza is in same stage for more that 3 min for small pizza, 4 min for medium pizza and 5 min for large pizza
 
-##### 5. Show time spent in each stage with each pizza card
+##### 5. It shows time spent in each stage with each pizza card
 
-##### 6. Display each stage in different cols with pizzas as cards, as shown in below diagram
+##### 6. It displays each stage in different cols with pizzas as cards
 
-##### 7. There should be a main display
+##### 7. It has a main display
 
-a. for all pizza in progress with their remaining time & order Id
-b. total pizza delivered today
+- for all pizza in progress with their total time & order Id
+- total pizza delivered today
 
-##### 8. Can be Canceled at any time before order is in Ready stage from Main section
+##### 8. Order can be Canceled at any time before order is in Ready stage from Main section
 
-##### 9. Pizza must be moved from one stage to another manually with either click on next/picked/cancel buttons
+##### 9. Pizza will be moved from one stage to another manually with click on Next buttons
 
-##### 10. Both screens should be on the same page
